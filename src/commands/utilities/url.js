@@ -19,6 +19,7 @@ module.exports = {
 				await interaction.reply({ content: 'URL không hợp lệ!', ephemeral: true });
 				return;
 			}
+			console.log(url)
 			await interaction.reply(url);
 		}
 	},
