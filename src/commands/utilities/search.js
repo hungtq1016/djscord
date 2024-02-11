@@ -4,7 +4,7 @@ const axios = require('axios');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('ffxiv')
+        .setName('search')
         .setDescription('Final fantasy 14 items.')
         .addIntegerOption(option => option.setName('page').setDescription('Tìm theo trang').setRequired(false))
         .addIntegerOption(option => option.setName('limit').setDescription('Số lượng vật phẩm').setRequired(false)),

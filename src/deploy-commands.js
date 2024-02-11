@@ -1,7 +1,13 @@
 const { Client, REST, Routes, GatewayIntentBits } = require('discord.js');
-const { clientId, token } = require('../config.json');
+// const { clientId, token } = require('../config.json');
 const fs = require('node:fs');
 const path = require('node:path');
+const dotenv = require('dotenv');
+
+dotenv.config();
+const token = process.env.DISCORD_TOKEN
+const clientId = process.env.CLIENT_ID
+
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // Tải lệnh từ các file

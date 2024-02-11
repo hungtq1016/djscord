@@ -41,12 +41,37 @@ module.exports = {
                         .setImage(`https://xivapi.com${item.IconHD}`)
 						.setDescription(item.Description) // Thêm mô tả item
 						.setThumbnail(`https://xivapi.com${item.Icon}`) // Đặt hình ảnh thumbnail bằng cách sử dụng URL Icon
-						.addFields(
-							{ name: 'Item Level', value: item.LevelItem.toString(), inline: true },
-							{ name: 'Category', value: item.ItemUICategory.Name, inline: true },
-							{ name: 'Average Price', value: `${item.PriceMid} Gil`, inline: true },
-							{ name: 'Max Stack Size', value: item.StackSize.toString(), inline: true }
-						);
+                        .setDescription(item.Description_en || 'Item Description')
+                        .addFields({
+                            "name": "Level",
+                            "value": "REPLACE_WITH_ITEM_LEVEL",
+                            "inline": true
+                          },
+                          {
+                            "name": "Unique",
+                            "value": "REPLACE_WITH_UNIQUE_STATUS",
+                            "inline": true
+                          },
+                          {
+                            "name": "Category",
+                            "value": "REPLACE_WITH_CATEGORY_NAME",
+                            "inline": true
+                          },
+                          {
+                            "name": "Average Price",
+                            "value": "REPLACE_WITH_AVERAGE_PRICE",
+                            "inline": true
+                          },
+                          {
+                            "name": "Untradable",
+                            "value": "REPLACE_WITH_UNTRADABLE_STATUS",
+                            "inline": true
+                          },
+                          {
+                            "name": "Max Stack Size",
+                            "value": "REPLACE_WITH_MAX_STACK_SIZE",
+                            "inline": true
+                          })
 
                         // Gửi embed với thông tin chi tiết sản phẩm
                         await interaction.reply({ embeds: [itemEmbed], ephemeral: true });
