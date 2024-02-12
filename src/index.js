@@ -2,17 +2,6 @@ const { REST } = require("@discordjs/rest"); // Define REST.
 const { Routes } = require("discord-api-types/v9"); // Define Routes.
 const fs = require("fs"); // Define fs (file system).
 const { Client, Intents, Collection } = require("discord.js"); // Define Client, Intents, and Collection.
-const express = require('express')
-const app = express()
-const port = 3000
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
