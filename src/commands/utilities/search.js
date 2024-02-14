@@ -5,23 +5,27 @@ const axios = require('axios');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('search')
-        .setDescription('Final fantasy 14 items.')
-        .addIntegerOption(option => option.setName('page').setDescription('Tìm theo trang').setRequired(false))
-        .addIntegerOption(option => option.setName('limit').setDescription('Số lượng vật phẩm').setRequired(false)),
+        .setDescription('Final fantasy 14 recipe item.')
+        .addStringOption(option =>
+            option.setName('item')
+            .setDescription('Tên của vật phẩm')
+            .setRequired(true)
+        ),
     async execute(interaction) {
-        let page = interaction.options.getInteger('page') ?? 1;
-        let limit = interaction.options.getInteger('limit') ?? 5;
-
-        await sendProductEmbeds(interaction,page,limit);
+        // let page = interaction.options.getInteger('page') ?? 1;
+        // let limit = interaction.options.getInteger('limit') ?? 5;
+        let item = interaction.options.getString('item') ?? '';
+        fetchItem(interaction,item)
     },
 };
-global.sendProductEmbeds = async function (interaction, page = 1, limit = 5) {
+
+const fetchItem = async(interaction,item) => {
     try {
         if (!interaction.deferred && !interaction.replied) {
             await interaction.deferReply({ ephemeral: true });
         }
 
-        const response = await axios.get(`https://xivapi.com/item?limit=${limit}&page=${page}`);
+        const response = await axios.get(`https://xivapi.com/search?string=${item}&indexes=Recipe`);
         const data = response.data.Results;
 
         if (!data || data.length === 0) {
@@ -40,7 +44,7 @@ global.sendProductEmbeds = async function (interaction, page = 1, limit = 5) {
                 const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId(`view_${item.ID}`) // Sử dụng ID sản phẩm để tạo customId duy nhất
+                        .setCustomId(`view_${item.Url}`) // Sử dụng ID sản phẩm để tạo customId duy nhất
                         .setLabel('🔍')
                         .setStyle(ButtonStyle.Primary),
                 );

@@ -40,7 +40,7 @@ global.sendProductEmbeds = async function (interaction, page = 1, limit = 5) {
                 const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId(`view_${item.ID}`) // Sử dụng ID sản phẩm để tạo customId duy nhất
+                        .setCustomId(`view_${item.Url}`) // Sử dụng ID sản phẩm để tạo customId duy nhất
                         .setLabel('🔍')
                         .setStyle(ButtonStyle.Primary),
                 );
